@@ -1,4 +1,4 @@
-import {LOCALSTORAGE_TOKEN_KEY} from '../utils'
+import { API_URLS, LOCALSTORAGE_TOKEN_KEY } from '../utils'
 
 const customFetch = async(url,{body, ...customConfig }) => {
     //segrigated the fetch() so that we dont have to write this again and again
@@ -26,7 +26,7 @@ const customFetch = async(url,{body, ...customConfig }) => {
     try{
         const response = await fetch(url, config)   //config is like the methods and all
         const data  =  await response.json()
-        if(response.success){
+        if(data.success){
             return{
                 data : data.data,
                 success : true
@@ -42,7 +42,8 @@ const customFetch = async(url,{body, ...customConfig }) => {
     }
 };
 
-const getPosts = (page, limit) => {
+export const getPosts = (page =1, limit = 5) => {
     //limit ----- api call for limited number of pages
-    return customFetch();
+    return customFetch(API_URLS.posts(page, limit));
+    method : 'GET';
 }
