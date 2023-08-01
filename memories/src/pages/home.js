@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 import { Post, Loader, FriendsList, CreatePost } from '../components';
 import styles from '../styles/home.module.css';
 import { useAuth, usePosts } from '../hooks';
@@ -23,4 +25,8 @@ const Home = () => {
   );
 };
 
+//here we will define all the array it gets 
+Home.propTypes = {
+  posts : PropTypes.array.isRequired,
+}
 export default Home;
