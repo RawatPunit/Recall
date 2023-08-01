@@ -1,5 +1,7 @@
-import { useEffect } from "react"
+import { useEffect,useState } from "react"
 import { getPosts } from '../api'
+import {Home} from '../pages';
+import { Loader, Navbar } from './';
 
 function App() {
   useEffect(() => {
@@ -11,6 +13,7 @@ function App() {
   }, []);
   return (
     <div className="App">
+      < Navbar/>
       <Home posts={posts}/>
     </div>
   );
