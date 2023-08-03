@@ -3,7 +3,7 @@ import { BrowserRouter as  Route, Router, Routes } from "react-router-dom";
 
 import { getPosts } from '../api'
 import {Home , Login} from '../pages';
-import { Loader, Navbar } from './';
+import { Loader, Navbar,Comment } from './';
 
 const About =  () => {
   return <h1>About</h1>;
