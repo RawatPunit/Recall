@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
+
 import { Comment } from '../components';
 import styles from '../styles/home.module.css';
+
 const Home = ({ posts }) => {
   console.log(posts);
   return (
@@ -49,7 +51,9 @@ const Home = ({ posts }) => {
     </div>
   );
 };
+
 Home.propTypes = {
   posts: PropTypes.array.isRequired,
 };
+
 export default Home;
