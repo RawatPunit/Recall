@@ -1,13 +1,15 @@
-import styles from '../styles/navbar.module.css'
+import {Link} from 'react-router-dom';
+import styles from '../styles/Navbar.module.css'
 
 const Navbar = () =>{
     return (
         <div className={styles.nav}>
             //two divs for left part and the right part
             <div className={styles.leftDiv}>
-                <a href='/'>
+                {/* link to '/' --> Home  */}
+                <Link to='/'>           
                     <img alt='' src='https://ninjasfiles.s3.amazonaws.com/0000000000003454.png'/>
-                </a>
+                </Link>
             </div>
             <div className={styles.rightNav}>
                 <div className={styles.user}>
@@ -19,7 +21,7 @@ const Navbar = () =>{
                 <div className={styles.navLinks}>
                     <ul>
                         <li>
-                            <a href='/'>Log In</a>
+                            <Link to='/Login'>Log In</Link>
                         </li>
                         <li>
                             <a href='/'>Log Out</a>

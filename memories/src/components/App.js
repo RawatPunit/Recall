@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react"
-import { BrowserRouter as Re, Route, Router } from "react-router-dom";
+import { BrowserRouter as  Route, Router, Routes } from "react-router-dom";
 
 import { getPosts } from '../api'
 import {Home , Login} from '../pages';
@@ -21,13 +21,22 @@ const Page404 =  () => {
 
 
 function App() {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
-    
-    const fetchPosts = async() =>{
+    const fetchPosts = async () => {
       const response = await getPosts();
-    }
+  
+      if (response.success) {
+        setPosts(response.data.posts);
+      }
+      setLoading(false);
+    };
+  
     fetchPosts();
   }, []);
+
 
   if(loading){
     return <Loader/>;
@@ -36,30 +45,32 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar/>
       < Router >
-      {/* exact keyword help to strictly load that page and no two pages willl get loads  */}
-
-        < Route exact path="/" >            
-          < Home posts={posts} />
-        </ Route >
-
-        < Route exact path="/Login" >
-          < Login />
-        </ Route >
+      <Navbar/>
+      <Routes>
         
-        < Route exact path="/about" >
-          < About />
-        </ Route >
-        
-        < Route exact path="/user/test" >
-          < UserInfo />
-        </ Route >
+        {/* exact keyword help to strictly load that page and no two pages willl get loads  */}
+          < Route exact path="/" >            
+            < Home posts={posts} />
+          </ Route >
 
-        < Route >
-          < Page 404 />
-        </ Route >
+          < Route exact path="/Login" >
+            < Login />
+          </ Route >
+          
+          < Route exact path="/about" >
+            < About />
+          </ Route >
+          
+          < Route exact path="/user/test" >
+            < UserInfo />
+          </ Route >
 
+          < Route >
+            < Page404 />
+          </ Route >
+          
+        </Routes>
       </ Router >
     </div>
   );
