@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import styles from '../styles/home.module.css';
 
 const Comment = ({ comment }) => {
