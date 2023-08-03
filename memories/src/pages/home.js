@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { Comment } from '../components';
+import  Comment  from '../components/Comment';
 import styles from '../styles/home.module.css';
 
 const Home = ({ posts }) => {
