@@ -4,6 +4,7 @@ import { BrowserRouter as  Route, Router, Routes } from "react-router-dom";
 import { getPosts } from '../api'
 import {Home , Login} from '../pages';
 import { Loader, Navbar } from './';
+import Signup from "../pages/Signup";
 
 const About =  () => {
   return <h1>About</h1>;
@@ -14,7 +15,7 @@ const UserInfo =  () => {
 };
 
 const Page404 =  () => {
-  return <h1>UserInfo</h1>;
+  return <h1>404</h1>;
 };
 
 
@@ -23,7 +24,9 @@ const Page404 =  () => {
 function App() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+  const auth = useAuth();
+
+
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await getPosts();
@@ -38,7 +41,7 @@ function App() {
   }, []);
 
 
-  if(loading){
+  if(auth.loading){
     return <Loader/>;
   }
 
@@ -58,6 +61,10 @@ function App() {
             < Login />
           </ Route >
           
+          < Route exact path="/register" >
+            < Signup />
+          </ Route >
+
           < Route exact path="/about" >
             < About />
           </ Route >

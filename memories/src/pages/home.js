@@ -4,6 +4,26 @@ import  {Comment}   from '../components';
 import styles from '../styles/home.module.css';
 
 const Home = ({ posts }) => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await getPosts();
+  
+      if (response.success) {
+        setPosts(response.data.posts);
+      }
+      setLoading(false);
+    };
+  
+    fetchPosts();
+  }, []);
+
+  if(auth.loading){
+    return <Loader/>;
+  }
+
   console.log(posts);
   return (
     <div className={styles.postsList}>
