@@ -5,8 +5,7 @@ const customFetch = async(url,{body, ...customConfig }) => {
     const token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY)//while logging in Token generated and stored locally 
 
     const headers = {
-        'content-type': 'application/json',
-        Accept : 'application/json'
+        'content-type': 'application/x-www-form-urlencoded',
     }
     if(token){      //inside the headers pass the authorization key 
         headers.Authorization = `Bearer ${token}`;
@@ -21,7 +20,7 @@ const customFetch = async(url,{body, ...customConfig }) => {
     };
 
     if(body){
-        config.body = JSON.stringify(body);
+        config.body = getFormBody(body); //imported from utils
     }
     try{
         const response = await fetch(url, config)   //config is like the methods and all
