@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import jwt from 'jwt-decode';
 import {AuthContext} from '../providers/AuthProvider' // so that we dont to use provider again and aigain
-import { login as userLogin } from "../api";
+import { editProfile, login as userLogin,register } from "../api";
 import { setItemInLocalStorage,  LOCALSTORAGE_TOKEN_KEY, removeItemInLocalStorage, getItemInLocalStorage } from "../utils";
 
 export const useAuth =() => {
@@ -23,6 +23,28 @@ export const useProvideAuth = () =>{
         setLoading(false);
     },[])
 
+    const updateUser = async (userId,name, password, confirmPassword) =>{
+        const response = await editProfile (
+            userId,
+            name,
+            password,
+            confirmPassword
+            );
+
+        if(response.success){                //------A
+            setUser(response.data.user)     // to reatin the data once logged in 
+            // setItemInLocalStorage(LOCALSTORAGE_TOKEN_KEY, response.data.token ? response.data.token : null)
+            return {
+                success : true
+            }
+        }else{
+            return{
+                success: true,
+                message : response.message,
+            }
+        }
+
+    }
     const login = async (email,password) => {
         const response = await userLogin (email,password);
 
@@ -64,6 +86,7 @@ export const useProvideAuth = () =>{
         user ,
         login ,
         logout,
-        loading
+        loading,
+        updateUser
     }
 }
