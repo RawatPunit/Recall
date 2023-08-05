@@ -2,7 +2,7 @@ import { useEffect,useState } from "react"
 import { BrowserRouter as  Route, Router, Routes } from "react-router-dom";
 
 import { getPosts } from '../api'
-import {Home , Login} from '../pages';
+import {Home , Login, Settings, Signup} from '../pages';
 import { Loader, Navbar } from './';
 import Signup from "../pages/Signup";
 
@@ -65,11 +65,11 @@ function App() {
             < Signup />
           </ Route >
 
-          < Route exact path="/about" >
-            < About />
+          < Route exact path="/settings" >
+            < Settings />
           </ Route >
           
-          < Route exact path="/user/test" >
+          < Route exact path="/register" >
             < UserInfo />
           </ Route >
 
