@@ -24,22 +24,17 @@ export const useProvideAuth = () =>{
     },[])
 
     const updateUser = async (userId,name, password, confirmPassword) =>{
-        const response = await editProfile (
-            userId,
-            name,
-            password,
-            confirmPassword
-            );
+        const response = await editProfile (userId,name,password,confirmPassword);
 
         if(response.success){                //------A
             setUser(response.data.user)     // to reatin the data once logged in 
-            // setItemInLocalStorage(LOCALSTORAGE_TOKEN_KEY, response.data.token ? response.data.token : null)
+            setItemInLocalStorage(LOCALSTORAGE_TOKEN_KEY, response.data.token ? response.data.token : null)
             return {
                 success : true
             }
         }else{
             return{
-                success: true,
+                success: false,
                 message : response.message,
             }
         }

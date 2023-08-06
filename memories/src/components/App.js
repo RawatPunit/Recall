@@ -1,10 +1,13 @@
 import { useEffect,useState } from "react"
-import { BrowserRouter as  Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter as  Route, Router, Routes,useNavigate } from "react-router-dom";
 
 import { getPosts } from '../api'
 import {Home , Login, Settings, Signup} from '../pages';
 import { Loader, Navbar } from './';
-import Signup from "../pages/Signup";
+import { useAuth } from "../hooks";
+// import Signup from "../pages/Signup";
+
+
 
 const About =  () => {
   return <h1>About</h1>;
@@ -18,7 +21,20 @@ const Page404 =  () => {
   return <h1>404</h1>;
 };
 
+const navigate = useNavigate();
+function PrivateRoute ({children, ...rest}){
+  const auth = useAuth();
+  return ( <Route 
+    {...rest}  //this will have the route and its children as specified in the function above
+    render= {() => {
+      if(auth.user){
+        return children;
+      }
 
+      return <navigate to="/login" />
+    }}
+  />);
+}
 
 
 function App() {
@@ -64,15 +80,15 @@ function App() {
           < Route exact path="/register" >
             < Signup />
           </ Route >
-
-          < Route exact path="/settings" >
-            < Settings />
-          </ Route >
           
           < Route exact path="/register" >
             < UserInfo />
           </ Route >
 
+          < PrivateRoute exact path="/settings" >
+            < Settings />
+          </ PrivateRoute >
+          
           < Route >
             < Page404 />
           </ Route >

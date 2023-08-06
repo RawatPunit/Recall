@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import  {Comment}   from '../components';
 import styles from '../styles/home.module.css';
 
-const Home = ({ posts }) => {
+const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState([]);
 
