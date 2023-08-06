@@ -2,7 +2,7 @@ import { useEffect,useState } from "react"
 import { BrowserRouter as  Route, Router, Routes,useNavigate } from "react-router-dom";
 
 import { getPosts } from '../api'
-import {Home , Login, Settings, Signup} from '../pages';
+import {Home , Login, Settings, Signup,UserProfile} from '../pages';
 import { Loader, Navbar } from './';
 import { useAuth } from "../hooks";
 // import Signup from "../pages/Signup";
@@ -89,6 +89,10 @@ function App() {
             < Settings />
           </ PrivateRoute >
           
+          < PrivateRoute exact path="/user/:userId" >
+            < Settings />
+          </ PrivateRoute >
+
           < Route >
             < Page404 />
           </ Route >
