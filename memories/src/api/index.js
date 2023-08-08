@@ -68,3 +68,9 @@ export const editProfile = async(userId,name, password, confirmPassword) => {
         body : { id:  userId,name ,  password, confirm_password: confirmPassword}
     });
 };
+
+export const fetchUserProfile = ( email, password ) => {            //this will be caleed in the user profile page
+    return customFetch(API_URLS.userInfo(userId),{
+        method : 'GET',
+    })
+}
