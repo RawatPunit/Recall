@@ -1,6 +1,5 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
-
 import { Loader } from '../components';
 import styles from '../styles/settings.module.css';
 import { useAuth } from '../hooks';
@@ -11,7 +10,7 @@ const UserProfile = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [requestInProgress, setRequestInProgress] = useState(false);
-  const { userId } = useParams();
+  const { userId } = useParams();   //wil give an object from where we can get userID
   const { addToast } = useToasts();
   const history = useHistory();
   const auth = useAuth();
