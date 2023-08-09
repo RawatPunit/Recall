@@ -59,7 +59,7 @@ const UserProfile = () => {
     const response = await removeFriend(userId);
 
     if (response.success) {
-      const friendship = auth.user.friends.filter(
+      const friendship = auth.user.friends.filter(    //using filter to find out from this array
         (friend) => friend.to_user._id === userId
       );
 

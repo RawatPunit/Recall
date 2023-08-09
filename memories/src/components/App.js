@@ -90,7 +90,7 @@ function App() {
           </ PrivateRoute >
           
           < PrivateRoute exact path="/user/:userId" >
-            < Settings />
+            < UserProfile />
           </ PrivateRoute >
 
           < Route >

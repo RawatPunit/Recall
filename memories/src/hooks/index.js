@@ -116,7 +116,16 @@ export const useProvideAuth = () => {
         });
         return;
     }
-  }
+    //if addfriend is false removing the friend.
+    const newFriends = user.friends.filter(
+        (f)=> f.to_user._id !== friend.to_user._id
+    );
+    setUser({               //upadating setUser once friend removed fn. is ran. 
+        ...user,
+        friends : newFriends
+    })
+    };
+    
   return {
     user,
     login,

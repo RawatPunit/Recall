@@ -86,3 +86,9 @@ export const addFriend = ( userId) => {            //this will be caleed in the 
         method : 'POST',
     })
 }
+
+export const removeFriend = ( userId) => {            //this will be caleed in the user profile page
+    return customFetch(API_URLS.removeFriend(userId),{
+        method : 'POST',
+    })
+}
