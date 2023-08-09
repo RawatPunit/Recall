@@ -69,8 +69,14 @@ export const editProfile = async(userId,name, password, confirmPassword) => {
     });
 };
 
-export const fetchUserProfile = ( email, password ) => {            //this will be caleed in the user profile page
+export const fetchUserProfile = ( userId) => {            //this will be caleed in the user profile page
     return customFetch(API_URLS.userInfo(userId),{
+        method : 'GET',
+    })
+}
+
+export const fetchUserFriends = ( ) => {            //this will be caleed in the user profile page
+    return customFetch(API_URLS.friends,{
         method : 'GET',
     })
 }
