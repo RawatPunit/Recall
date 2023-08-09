@@ -80,3 +80,9 @@ export const fetchUserFriends = ( ) => {            //this will be caleed in the
         method : 'GET',
     })
 }
+
+export const addFriend = ( userId) => {            //this will be caleed in the user profile page
+    return customFetch(API_URLS.createFriendship(userId),{
+        method : 'POST',
+    })
+}

@@ -8,7 +8,8 @@ const initialState = {
     logout: () => {},
     loading: true,
     signUp: () => {},
-    updateUser:() =>{}
+    updateUser:() =>{},
+    updateUserFriends : () =>{}     //an initial state -- passing an empty function
 }
 
 export const AuthContext = createContext(initialState)

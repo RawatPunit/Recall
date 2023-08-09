@@ -51,7 +51,9 @@ const UserProfile = () => {
     return false;
   };
 
-  const handleRemoveFriendClick = async () => {
+
+  //to remove a friend
+  const handleRemoveFriendClick = async () => {   
     setRequestInProgress(true);
 
     const response = await removeFriend(userId);
@@ -76,7 +78,7 @@ const UserProfile = () => {
   const handleAddFriendClick = async () => {
     setRequestInProgress(true);
 
-    const response = await addFriend(userId);
+    const response = await addFriend(userId);     // this userid is coming from the params.url
 
     if (response.success) {
       const { friendship } = response.data;
