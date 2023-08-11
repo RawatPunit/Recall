@@ -17,9 +17,9 @@ const CreatePost = () => {
     const response = await addPost(post);
 
     if (response.success) {
-      setPost('');
+      setPost('');      //clear out the text area. once set to submit
       posts.addPostToState(response.data.post);
-      addToast('Post created successfully', {
+      addToast('Post created successfully', {   
         appearance: 'success',
       });
     } else {

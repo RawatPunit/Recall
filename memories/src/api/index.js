@@ -92,3 +92,12 @@ export const removeFriend = ( userId) => {            //this will be caleed in t
         method : 'POST',
     })
 }
+
+export const addPost = (content) => {            //this will be caleed in the user profile page
+    return customFetch(API_URLS.createPost(),{
+        method : 'POST',
+        body:{
+            content,
+        }
+    })
+}
