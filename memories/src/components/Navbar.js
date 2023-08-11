@@ -10,7 +10,7 @@ const Navbar = () => {
   const [searchText, setSearchText] = useState('');
   const auth = useAuth();
 
-  useEffect(() => {
+  useEffect(() => {         // this is the API call
     const fetchUsers = async () => {
       const response = await searchUsers(searchText);
 
@@ -19,12 +19,12 @@ const Navbar = () => {
       }
     };
 
-    if (searchText.length > 2) {
+    if (searchText.length > 2) {      //if text is less than 2 we wont call the API
       fetchUsers();
     } else {
       setResults([]);
     }
-  }, [searchText]);
+  }, [searchText]);         //dependency on [searchText] whenever the search text changes this USEEFFECT () hook will be called
 
   return (
     <div className={styles.nav}>
