@@ -111,3 +111,16 @@ export const createComment = async (content, postId) => {
       },
     });
   };
+
+  export const toggleLike = (itemId, itemType) => {             //only one API for liking and disliking tooo...
+    return customFetch(API_URLS.toggleLike(itemId, itemType), {
+      method: 'POST',
+    });
+  };
+  
+  export const searchUsers = (searchText) => {
+    return customFetch(API_URLS.searchUsers(searchText), {
+      method: 'GET',
+    });
+  };
+  
