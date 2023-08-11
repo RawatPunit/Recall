@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import  {Comment, FriendsList}   from '../components';
+import  {Comment, CreatePost, FriendsList,CreatePost}   from '../components';
 import styles from '../styles/home.module.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks';
@@ -31,6 +31,7 @@ const Home = () => {
   return (
     <div className={styles.home}>
     <div className={styles.postsList}>
+    <CreatePost/>
       {posts.map((post) => (
         <div className={styles.postWrapper} key={`post-${post._id}`}>
           <div className={styles.postHeader}>
