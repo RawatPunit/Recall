@@ -101,3 +101,13 @@ export const addPost = (content) => {            //this will be caleed in the us
         }
     })
 }
+
+export const createComment = async (content, postId) => {
+    return customFetch(API_URLS.comment(), {
+      method: 'POST',
+      body: {
+        post_id: postId,    //id so tht 1 cld know which post has the commt.
+        content,
+      },
+    });
+  };

@@ -163,16 +163,16 @@ export const useProvidePosts = () => {
     fetchPosts();
   }, []);
 
-  const addPostToState = (post) => {
-    const newPosts = [post, ...posts];
+  const addPostToState = (post) => {  //global state relation
+    const newPosts = [post, ...posts];  //keep our post at the top and spread the rest of the posts
 
     setPosts(newPosts);
   };
 
-  const addComment = (comment, postId) => {
-    const newPosts = posts.map((post) => {
-      if (post._id === postId) {
-        return { ...post, comments: [...post.comments, comment] };
+  const addComment = (comment, postId) => { 
+    const newPosts = posts.map((post) => {    //maps over the post array 
+      if (post._id === postId) {    // this finds the post ID which has been passed -------inside addComment function
+        return { ...post, comments: [...post.comments, comment] };  //precaution see the comment is added at the last of the comments
       }
       return post;
     });
