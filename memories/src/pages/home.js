@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import  {Comment}   from '../components';
+import  {Comment, FriendsList}   from '../components';
 import styles from '../styles/home.module.css';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState([]);
+  const auth = useAuth();   //using this so that friend only be seen when the user is looged in.
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -27,6 +29,7 @@ const Home = () => {
 
   console.log(posts);
   return (
+    <div className={styles.home}>
     <div className={styles.postsList}>
       {posts.map((post) => (
         <div className={styles.postWrapper} key={`post-${post._id}`}>
@@ -76,6 +79,8 @@ const Home = () => {
           </div>
         </div>
       ))}
+    </div>
+    {auth.user && <FriendsList/>}
     </div>
   );
 };
