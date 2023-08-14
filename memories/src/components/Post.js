@@ -6,7 +6,7 @@ import { useToasts } from 'react-toast-notifications';
 import { createComment, toggleLike } from '../api';
 import { usePosts } from '../hooks';
 import styles from '../styles/home.module.css';
-import { Comment } from './';
+import { Comment } from '.';
 
 const Post = ({ post }) => {
   const [comment, setComment] = useState('');
@@ -15,7 +15,8 @@ const Post = ({ post }) => {
   const { addToast } = useToasts();
 
   const handleAddComment = async (e) => {
-    if (e.key === 'Enter') {            // this enter pressing will mak ethe API call
+    if (e.key === 'Enter') {
+      // this enter pressing will mak ethe API call
       setCreatingComment(true);
 
       const response = await createComment(comment, post._id);
