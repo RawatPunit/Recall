@@ -1,4 +1,4 @@
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import { Loader } from '../components';
 import styles from '../styles/settings.module.css';
@@ -12,7 +12,7 @@ const UserProfile = () => {
   const [requestInProgress, setRequestInProgress] = useState(false);
   const { userId } = useParams(); //wil give an object from where we can get userID
   const { addToast } = useToasts();
-  const history = useHistory();
+  const navigate = useNavigate();
   const auth = useAuth();
 
   useEffect(() => {
@@ -25,14 +25,14 @@ const UserProfile = () => {
         addToast(response.message, {
           appearance: 'error',
         });
-        return history.push('/');
+        return navigate('/');
       }
 
       setLoading(false);
     };
 
     getUser();
-  }, [userId, history, addToast]);
+  }, [userId, navigate, addToast]);
 
   if (loading) {
     return <Loader />;
