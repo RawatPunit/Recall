@@ -6,7 +6,7 @@ import { useToasts } from 'react-toast-notifications';
 import { createComment, toggleLike } from '../api';
 import { usePosts } from '../hooks';
 import styles from '../styles/home.module.css';
-import { Comment } from '.';
+import { Comment } from './';
 
 const Post = ({ post }) => {
   const [comment, setComment] = useState('');
