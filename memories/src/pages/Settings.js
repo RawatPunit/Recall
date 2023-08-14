@@ -1,126 +1,148 @@
-import styles from '../styles/settings.module.css'
-import {useAuth} from '../hooks'
 import { useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
 
-//here there was no async i had addedit remenber to rectify 
-const Settings = async () => {
-    const auth =useAuth(); 
-    const [editMode, setEditMode] = useState(false);
-    const [name, setName] = useState(auth.user?.name ? auth.user.name : '');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [savingForm, setSavingform] = useState(false);
-    const{addToast} = useToasts();
-  
-    const clearform = () =>{
-        setPassword('');
-        setConfirmPassword('');
-    };
+import styles from '../styles/settings.module.css';
+import { useAuth } from '../hooks';
 
-    const updateProfile = async () =>{
-        setSavingform(true);
+const Settings = () => {
+  const auth = useAuth();
+  const [editMode, setEditMode] = useState(false);
+  const [name, setName] = useState(auth.user?.name ? auth.user.name : '');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [savingForm, setSavingForm] = useState(false);
+  const { addToast } = useToasts();
 
-        let error = false;
-        if(!name || !password || !confirmPassword)
-            addToast('Please fill alll the fields',{
-            appearance: 'error'
-            })
-            
-            error = true;
-        }
+  const clearForm = () => {
+    setPassword('');
+    setConfirmPassword('');
+  };
 
-        if(password!== confirmPassword){
-            addToast('password and confirm password does not mathch',{
-                appearance: 'error'
-            });
-        
-            error = true;
-        }
+  const updateProfile = async () => {
+    setSavingForm(true);
 
-        if(error){
-            return setSavingform(false);
-        }
+    let error = false;
+    if (!name || !password || !confirmPassword) {
+      addToast('Please fill all the fields', {
+        appearance: 'error',
+      });
 
-        const response = await auth.updateUser(auth.user._id, name,password,confirmPassword);
+      error = true;
+    }
 
-        if(response.success){
-            setEditMode(false)
-            setSavingform(false)
-            clearform();
-            return addToast('user updated successfully',{
-                appearance: 'success'
-            });
-        }else{
-            addToast('user updated successfully',{
-            appearance: 'error'
-        });
-        setSavingform(false)
-    };
-    return (
-    <div className={styles.Settings}>
-        <div className={styles.imgContainer}>
-            <img src='dummy img src' alt=''></img>
-        </div>
+    if (password !== confirmPassword) {
+      addToast('Password and confirm password does not match', {
+        appearance: 'error',
+      });
 
-        <div className={styles.field}>
-            <div className={styles.fieldLabel}>Email</div>
-            {/* <div className={styles.fieldValue}>{auth.user && auth.user.email ? email : null}</div>  */}
-            {/* can be written as below */}
-            <div className={styles.fieldValue}>{auth.user?.email}</div>
-        </div>
+      error = true;
+    }
 
-        <div className={styles.field}>
-            <div className={styles.fieldLabel}>Name</div>
-            {editMode ? (
-            <input
-                type='text'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                /> 
-                /* <div className={styles.fieldValue}>{auth.user && auth.user.name ? email : null}</div> */ 
-            ) : (
-                <div className={styles.fieldValue}>{auth.user?.name}</div>
-            )}
-        </div>
+    if (error) {
+      return setSavingForm(false);
+    }
 
-                {/* will be open only if in  editmode */}
-        {editMode && (
-            <>
-            <div className={styles.field}>
-                <div className={styles.fieldLabel}>Password</div>
-                <input type='password' 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}/>
-            </div>
+    const response = await auth.updateUser(
+      auth.user._id,
+      name,
+      password,
+      confirmPassword
+    );
 
-            <div className={styles.field}>
-                <div className={styles.fieldLabel}>Confirm Password</div>
-                <input type='password' 
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}/>
-            </div>
-            </>
+    console.log('settings response', response);
+    if (response.success) {
+      setEditMode(false);
+      setSavingForm(false);
+      clearForm();
+
+      return addToast('User updated successfully', {
+        appearance: 'success',
+      });
+    } else {
+      addToast(response.message, {
+        appearance: 'error',
+      });
+    }
+    setSavingForm(false);
+  };
+
+  return (
+    <div className={styles.settings}>
+      <div className={styles.imgContainer}>
+        <img
+          src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+          alt=""
+        />
+      </div>
+
+      <div className={styles.field}>
+        <div className={styles.fieldLabel}>Email</div>
+        <div className={styles.fieldValue}>{auth.user?.email}</div>
+      </div>
+
+      <div className={styles.field}>
+        <div className={styles.fieldLabel}>Name</div>
+        {editMode ? (
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        ) : (
+          <div className={styles.fieldValue}>{auth.user?.name}</div>
         )}
+      </div>
 
-        
-        <div className='styles.btnGrp'>
-            {/* defined in index.css styles will be picked from there */}
-            {editMode ? (
-                <>
-                    <button className={`button ${styles.editBTn}`} 
-                        onclick={updateProfile}
-                        disabled ={savingForm} >
-                        {savingForm ? 'Saving Profile...' :  'Save Profile' }
-                    </button>
-                    <button className={`button ${styles.editBTn}`} onclick={()=> setEditMode(false)}> Go back
-                    </button>
-                </>
-            ):(
-                 <button className={`button ${styles.editBTn}`}  onclick={()=> setEditMode(true)}>Edit Profile</button>
-             )}
-        </div>
-    </div> );
+      {editMode && (
+        <>
+          <div className={styles.field}>
+            <div className={styles.fieldLabel}>Password</div>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div className={styles.field}>
+            <div className={styles.fieldLabel}>Confirm Password</div>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+        </>
+      )}
+
+      <div className={styles.btnGrp}>
+        {editMode ? (
+          <>
+            <button
+              className={`button ${styles.saveBtn}`}
+              onClick={updateProfile}
+              disabled={savingForm}
+            >
+              {savingForm ? 'Saving profile...' : 'Save profile'}
+            </button>
+            <button
+              className={`button ${styles.editBtn}`}
+              onClick={() => setEditMode(false)}
+            >
+              Go back
+            </button>
+          </>
+        ) : (
+          <button
+            className={`button ${styles.editBtn}`}
+            onClick={() => setEditMode(true)}
+          >
+            Edit Profile
+          </button>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Settings;
