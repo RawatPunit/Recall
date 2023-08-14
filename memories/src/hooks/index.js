@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import jwt from 'jwt-decode';
-
+// import { AuthProvider,PostsProvider } from '../providers';
 import { AuthContext, PostsContext } from '../providers';
 import {
   editProfile,

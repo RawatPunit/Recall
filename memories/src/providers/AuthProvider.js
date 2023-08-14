@@ -1,13 +1,13 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
-import { useProvideAuth } from "../hooks";
+import { useProvideAuth } from '../hooks';
 
 const initialState = {
     user : null,
     login: () => {},
     logout: () => {},
     loading: true,
-    signUp: () => {},
+    signup: () => {},
     updateUser:() =>{},
     updateUserFriends : () =>{}     //an initial state -- passing an empty function
 }

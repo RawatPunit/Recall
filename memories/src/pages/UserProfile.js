@@ -10,7 +10,7 @@ const UserProfile = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [requestInProgress, setRequestInProgress] = useState(false);
-  const { userId } = useParams();   //wil give an object from where we can get userID
+  const { userId } = useParams(); //wil give an object from where we can get userID
   const { addToast } = useToasts();
   const history = useHistory();
   const auth = useAuth();
@@ -51,15 +51,13 @@ const UserProfile = () => {
     return false;
   };
 
-
-  //to remove a friend
-  const handleRemoveFriendClick = async () => {   
+  const handleRemoveFriendClick = async () => {
     setRequestInProgress(true);
 
     const response = await removeFriend(userId);
 
     if (response.success) {
-      const friendship = auth.user.friends.filter(    //using filter to find out from this array
+      const friendship = auth.user.friends.filter(
         (friend) => friend.to_user._id === userId
       );
 
@@ -78,7 +76,7 @@ const UserProfile = () => {
   const handleAddFriendClick = async () => {
     setRequestInProgress(true);
 
-    const response = await addFriend(userId);     // this userid is coming from the params.url
+    const response = await addFriend(userId);
 
     if (response.success) {
       const { friendship } = response.data;
